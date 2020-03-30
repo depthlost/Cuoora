@@ -1,2 +1,2 @@
 # Cuoora
-Sistema basado en paginas web sobre preguntas y respuestas.
+Sistema interactivo mediante paginas web sobre preguntas y respuestas.
