@@ -33,22 +33,22 @@ TopicalTest >> setUp [
 { #category : #tests }
 TopicalTest >> testAddQuestion [
 	self
-		assert: topical getQuestions size equals: 2;
-		assert: topical getQuestions includes: question1;
-		assert: topical getQuestions includes: question2.
+		assert: topical questions size equals: 2;
+		assert: topical questions includes: question1;
+		assert: topical questions includes: question2.
 	topical removeQuestion: question1.
 	self
-		assert: topical getQuestions size equals: 1;
+		assert: topical questions size equals: 1;
 		assert: (topical addQuestion: question1) equals: question1;
-		assert: topical getQuestions size equals: 2
+		assert: topical questions size equals: 2
 ]
 
 { #category : #tests }
 TopicalTest >> testRemoveQuestion [
 	self
-		assert: topical getQuestions size equals: 2;
+		assert: topical questions size equals: 2;
 		assert: (topical removeQuestion: question1) equals: question1;
-		assert: topical getQuestions size equals: 1;
+		assert: topical questions size equals: 1;
 		assert: (topical removeQuestion: question2) equals: question2;
-		assert: topical getQuestions isEmpty
+		assert: topical questions isEmpty
 ]
