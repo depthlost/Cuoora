@@ -21,7 +21,7 @@ CuooraTest >> setUp [
 ]
 
 { #category : #running }
-CuooraTest >> testAddTopical [
+CuooraTest >> testAddTopic [
 	self
 		assert: cuoora topics isEmpty;
 		assert: (cuoora addTopical: topical1) equals: topical1;
