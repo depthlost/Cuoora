@@ -76,11 +76,13 @@ User >> removeAnswer: anAnswer [
 
 { #category : #adding }
 User >> removeQuestion: aQuestion [
+"Metodo que se encarga de remover una pregunta determinada del sistema, y todas sus respuestas"
 	^ questions remove: aQuestion
 ]
 
 { #category : #adding }
 User >> username: anUsername password: aPassword [
+"Metodo que se encarga de crear un nuevo usuario dado un nombre y una contraseña, y lo retorna"
 	username := anUsername.
 	password := aPassword
 ]

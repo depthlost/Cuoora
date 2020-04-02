@@ -23,12 +23,14 @@ Cuoora class >> newHHH [
 
 { #category : #adding }
 Cuoora >> addTopic: aTopic [
+"Metodo que añade un topico al sistema"
 	^ topics add: aTopic
 ]
 
 { #category : #adding }
-Cuoora >> addUser: anUser [
-	^ users add: anUser
+Cuoora >> addUser: aUser [
+"Metodo que añade un usuario al sistema"
+	^ users add: aUser
 ]
 
 { #category : #initialization }
