@@ -5,14 +5,14 @@ Class {
 }
 
 { #category : #tests }
-QualificationTest >> testIsLike [
+QualificationTest >> testLike [
 	self
 		assert:
 			(Qualification
 				author: (User username: 'luis' password: 'luis123')
-				like: true) isLike;
+				like: true) like;
 		deny:
 			(Qualification
 				author: (User username: 'maria' password: 'maria123')
-				like: false) isLike.
+				like: false) like.
 ]

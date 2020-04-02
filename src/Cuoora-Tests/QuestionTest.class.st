@@ -51,9 +51,9 @@ QuestionTest >> loadQuestion [
 { #category : #running }
 QuestionTest >> loadTopics [
 	topics := OrderedCollection new
-		add: (Topical name: 'frameworks' description: 'A framework is...');
-		add: (Topical name: 'pharo' description: 'pharo is...');
-		add: (Topical name: 'seaside' description: 'seaside is...');
+		add: (Topic name: 'frameworks' description: 'A framework is...');
+		add: (Topic name: 'pharo' description: 'pharo is...');
+		add: (Topic name: 'seaside' description: 'seaside is...');
 		yourself
 ]
 

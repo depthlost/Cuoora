@@ -3,8 +3,8 @@ Class {
 	#superclass : #TestCase,
 	#instVars : [
 		'cuoora',
-		'topical1',
-		'topical2',
+		'topic1',
+		'topic2',
 		'user1',
 		'user2'
 	],
@@ -14,8 +14,8 @@ Class {
 { #category : #running }
 CuooraTest >> setUp [
 	cuoora := Cuoora new.
-	topical1 := Topical name: 'seaside' description: 'framework for...'.
-	topical2 := Topical name: 'pharo' description: 'environment of...'.
+	topic1 := Topic name: 'seaside' description: 'framework for...'.
+	topic2 := Topic name: 'pharo' description: 'environment of...'.
 	user1 := User username: 'maria' password: 'maria123'.
 	user2 := User username: 'pedro' password: 'pedro123'
 ]
@@ -24,8 +24,8 @@ CuooraTest >> setUp [
 CuooraTest >> testAddTopic [
 	self
 		assert: cuoora topics isEmpty;
-		assert: (cuoora addTopical: topical1) equals: topical1;
-		assert: (cuoora addTopical: topical2) equals: topical2;
+		assert: (cuoora addTopic: topic1) equals: topic1;
+		assert: (cuoora addTopic: topic2) equals: topic2;
 		assert: cuoora topics size equals: 2
 ]
 
@@ -52,10 +52,10 @@ CuooraTest >> testNew [
 CuooraTest >> testTopics [
 	| nTopics |
 	cuoora
-		addTopical: topical1;
-		addTopical: topical2.
+		addTopic: topic1;
+		addTopic: topic2.
 	nTopics := cuoora topics: #('seaside').
 	self
 		assert: nTopics size equals: 1;
-		assert: (nTopics includes: topical1)
+		assert: (nTopics includes: topic1)
 ]

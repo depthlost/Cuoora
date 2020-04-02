@@ -7,12 +7,17 @@ Class {
 		'topicsOfInterest',
 		'questions',
 		'answers',
-		'userName',
+		'username',
 		'password',
 		'dateTime'
 	],
 	#category : #'Cuoora-Model'
 }
+
+{ #category : #'instance creation' }
+User class >> username: anUsername password: aPassword [
+	^ self new username: anUsername password: aPassword
+]
 
 { #category : #adding }
 User >> addAnswer: anAnswer [
@@ -35,6 +40,11 @@ User >> addTopicOfInterest: aTopic [
 ]
 
 { #category : #adding }
+User >> answers [
+	^ answers
+]
+
+{ #category : #adding }
 User >> follow: aUser [
 	^ following add: aUser
 ]
@@ -45,6 +55,32 @@ User >> getRelevantQuestions [
 ]
 
 { #category : #adding }
+User >> initialize [
+	followers := OrderedCollection new.
+	following := OrderedCollection new.
+	answers := OrderedCollection new.
+	questions := OrderedCollection new.
+	topicsOfInterest := OrderedCollection new.
+	dateTime := DateAndTime now
+]
+
+{ #category : #adding }
 User >> questions [
 	^ questions
+]
+
+{ #category : #adding }
+User >> removeAnswer: anAnswer [
+	^ answers remove: anAnswer
+]
+
+{ #category : #adding }
+User >> removeQuestion: aQuestion [
+	^ questions remove: aQuestion
+]
+
+{ #category : #adding }
+User >> username: anUsername password: aPassword [
+	username := anUsername.
+	password := aPassword
 ]
