@@ -41,6 +41,7 @@ Cuoora >> initialize [
 
 { #category : #adding }
 Cuoora >> topics [
+"Devuelve el listado de topicos"
 	^ topics
 ]
 
@@ -51,5 +52,6 @@ Cuoora >> topics: topicsNames [
 
 { #category : #adding }
 Cuoora >> users [
+"Devuelve el listado de usuarios"
 	^ users
 ]

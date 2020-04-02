@@ -17,20 +17,21 @@ Post class >> author: anAuthor description: aDescription [
 
 { #category : #initialization }
 Post >> author [
+"Devuelve el autor de un post"
 	^ author
 ]
 
 { #category : #initialization }
 Post >> author: anAuthor description: aDescription [
+"Settea el autor y la descripcion del post"
 	author := anAuthor.
 	description := aDescription
 ]
 
 { #category : #initialization }
 Post >> initialize [
-
 	dateTime := DateAndTime now.
-	qualifications := OrderedCollection new.
+	qualifications := OrderedCollection new
 ]
 
 { #category : #initialization }
