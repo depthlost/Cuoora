@@ -10,21 +10,17 @@ Class {
 
 { #category : #tests }
 AnswerTest >> setUp [
-	| answerAuthor |
-	question := Question
-		author: (User username: 'luis' password: 'luis123')
-		title: 'A title'
+	| questionAuthor answerAuthor |
+	questionAuthor := User username: 'luis' password: 'luis123'.
+	question := questionAuthor
+		addQuestion: 'A title'
 		description: 'A description'
 		topics:
 			(OrderedCollection new
 				add: (Topic name: 'Framework' description: 'A framework is...');
 				yourself).
 	answerAuthor := User username: 'maria' password: 'maria123'.
-	answer := Answer
-		author: answerAuthor
-		question: question
-		description: 'It is...'.
-	answerAuthor addAnswer: answer
+	answer := answerAuthor addAnswer: 'It is...' answerTo: question
 ]
 
 { #category : #tests }

@@ -27,11 +27,11 @@ PostTest >> setUp [
 { #category : #tests }
 PostTest >> testAddQualification [
 	self
-		assert: post likes equals: 0;
-		assert: post dislikes equals: 0;
+		assert: post getLikes equals: 0;
+		assert: post getDislikes equals: 0;
 		assert: (post addQualification: defaultQualification)
 			equals: defaultQualification;
-		assert: post likes equals: 1
+		assert: post getLikes equals: 1
 ]
 
 { #category : #tests }
@@ -61,7 +61,7 @@ PostTest >> testIsLikeQualificationOf [
 { #category : #tests }
 PostTest >> testPostedBy [
 	self loadUsers.
-	self assert: post postedBy: defaultUser.
+	self assert: (post postedBy: defaultUser).
 	self
 		assert: ((Post author: user1 description: 'A description...') postedBy: user1)
 ]
@@ -73,7 +73,7 @@ PostTest >> testRemoveQualification [
 		assert: (post removeQualification: defaultUser) equals: nil.
 	post setQualification: defaultQualification.
 	self
-		assert: (post removeQualification: defaultQualification)
+		assert: (post removeQualification: defaultUser)
 			equals: defaultQualification;
 		assert: (post isLikeQualificationOf: defaultUser) equals: nil
 ]

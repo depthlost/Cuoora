@@ -31,6 +31,11 @@ Answer >> remove [
 ]
 
 { #category : #accessing }
+Answer >> removeFromAutor [
+	author removeAnswer: self
+]
+
+{ #category : #accessing }
 Answer >> respondsTo: aUser [
 	^ question author == aUser
 ]

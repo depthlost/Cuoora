@@ -14,7 +14,38 @@ Class {
 	#category : #'Cuoora-Tests'
 }
 
-{ #category : #tests }
+{ #category : #initialization }
+QuestionTest >> initializeAnswers [
+	answer1 := user1 addAnswer: 'answer 1' answerTo: question.
+	answer2 := user1 addAnswer: 'answer 2' answerTo: question.
+	answer3 := user2 addAnswer: 'answer 3' answerTo: question
+]
+
+{ #category : #initialization }
+QuestionTest >> initializeQuestion [
+	question := author
+		addQuestion: 'A title'
+		description: 'A description'
+		topics: topics
+]
+
+{ #category : #initialization }
+QuestionTest >> initializeTopics [
+	topics := OrderedCollection new
+		add: (Topic name: 'frameworks' description: 'A framework is...');
+		add: (Topic name: 'pharo' description: 'pharo is...');
+		add: (Topic name: 'seaside' description: 'seaside is...');
+		yourself
+]
+
+{ #category : #initialization }
+QuestionTest >> initializeUsers [
+	author := User username: 'lisa' password: 'lisa123'.
+	user1 := User username: 'juan' password: 'juan123'.
+	user2 := User username: 'lino' password: 'lino123'
+]
+
+{ #category : #initialization }
 QuestionTest >> linkData [
 	author addQuestion: question.
 	question
@@ -24,75 +55,30 @@ QuestionTest >> linkData [
 ]
 
 { #category : #running }
-QuestionTest >> loadAnswers [
-	answer1 := Answer
-		author: user1
-		question: question
-		description: 'answer 1'.
-	answer2 := Answer
-		author: user1
-		question: question
-		description: 'answer 2'.
-	answer3 := Answer
-		author: user2
-		question: question
-		description: 'answer 3'
-]
-
-{ #category : #running }
-QuestionTest >> loadQuestion [
-	question := Question
-		author: author
-		title: 'A title'
-		description: 'A description'
-		topics: topics
-]
-
-{ #category : #running }
-QuestionTest >> loadTopics [
-	topics := OrderedCollection new
-		add: (Topic name: 'frameworks' description: 'A framework is...');
-		add: (Topic name: 'pharo' description: 'pharo is...');
-		add: (Topic name: 'seaside' description: 'seaside is...');
-		yourself
-]
-
-{ #category : #running }
-QuestionTest >> loadUsers [
-	author := User username: 'lisa' password: 'lisa123'.
-	user1 := User username: 'juan' password: 'juan123'.
-	user2 := User username: 'lino' password: 'lino123'
-]
-
-{ #category : #running }
 QuestionTest >> setUp [
 	self
-		loadUsers;
-		loadTopics;
-		loadQuestion;
-		loadAnswers
+		initializeUsers;
+		initializeTopics;
+		initializeQuestion.
 ]
 
 { #category : #tests }
 QuestionTest >> testAddAnswer [
+	| answer |
+	self assert: question answers isEmpty.
+	answer := user1 addAnswer: 'your question...' answerTo: question.
 	self
-		assert: question answers isEmpty;
-		assert: (question addAnswer: answer1) equals: answer1;
 		assert: question answers size equals: 1;
-		assert: (question addAnswer: answer2) equals: answer2;
-		assert: question answers size equals: 2
+		assert: (question answers includes: answer)
 ]
 
 { #category : #tests }
 QuestionTest >> testRemove [
 
 	|authorsOfResponses topicsOfQuestion authorOfQuestion|
-	self linkData.
+	self initializeAnswers.
 	authorOfQuestion := question author.
 	topicsOfQuestion := question topics.
 	authorsOfResponses := (question answers collect: [ :answer | answer author]) asSet.
 	question remove.
-	self deny: (authorOfQuestion questions includes: question);
-		assert: (topicsOfQuestion noneSatisfy: [ :topical | topical questions includes: question ]);
-		assert: (authorsOfResponses noneSatisfy: [ :authorOfResponse | authorOfResponse answers question == question ])
 ]

@@ -20,8 +20,9 @@ User class >> username: anUsername password: aPassword [
 ]
 
 { #category : #adding }
-User >> addAnswer: anAnswer [
-	^ answers add: anAnswer
+User >> addAnswer: aDescription answerTo: question [
+	^ answers
+		add: (Answer author: self question: question description: aDescription)
 ]
 
 { #category : #adding }
@@ -30,8 +31,14 @@ User >> addFollower: aFollower [
 ]
 
 { #category : #adding }
-User >> addQuestion: aQuestion [
-	^ questions add: aQuestion
+User >> addQuestion: aTitle description: aDescription topics: someTopics [
+	^ questions
+		add:
+			(Question
+				author: self
+				title: aTitle
+				description: aDescription
+				topics: someTopics)
 ]
 
 { #category : #adding }
@@ -45,13 +52,51 @@ User >> answers [
 ]
 
 { #category : #adding }
+User >> calculateScore [
+	^ questions size * 20
+		+ (questions sumNumbers: [ :question | question calculateScore ])
+		+ (self getAnswersToOtherUsers size * 50)
+		+ (answers sumNumbers: [ :answer | answer calculateScore ])
+]
+
+{ #category : #adding }
 User >> follow: aUser [
+	aUser addFollower: self.
 	^ following add: aUser
 ]
 
 { #category : #adding }
+User >> followers [
+	^ followers
+]
+
+{ #category : #adding }
+User >> following [
+	^ following
+]
+
+{ #category : #adding }
+User >> getAllQuestionsOfFollowings [
+	^ (following collect: [ :user | user questions ])
+		flatCollectAsSet: [ :question | question ]
+]
+
+{ #category : #adding }
+User >> getAllQuestionsOfTopicsOfInterest [
+	^ (topicsOfInterest collect: [ :topic | topic questions ])
+		flatCollectAsSet: [ :question | question ]
+]
+
+{ #category : #adding }
+User >> getAnswersToOtherUsers [
+	^ answers reject: [ :answer | answer respondsTo: self ]
+]
+
+{ #category : #adding }
 User >> getRelevantQuestions [
-	^ topicsOfInterest do: [ :each | each questions ]
+	^ self getAllQuestionsOfFollowings
+		addAll: self getAllQuestionsOfTopicsOfInterest;
+		yourself
 ]
 
 { #category : #adding }
@@ -77,6 +122,11 @@ User >> removeAnswer: anAnswer [
 { #category : #adding }
 User >> removeQuestion: aQuestion [
 	^ questions remove: aQuestion
+]
+
+{ #category : #adding }
+User >> topicsOfInterest [
+	^ topicsOfInterest
 ]
 
 { #category : #adding }

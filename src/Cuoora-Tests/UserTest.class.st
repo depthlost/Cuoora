@@ -15,58 +15,63 @@ Class {
 	#category : #'Cuoora-Tests'
 }
 
-{ #category : #running }
-UserTest >> linkQuestionsAndAnswers [
-	user2 addQuestion: user2Question.
-	user3 addQuestion: user3Question.
-	user
-		addQuestion: userQuestion;
-		addAnswer: userAnswerToMe;
-		addAnswer: userAnswerToOther
+{ #category : #initialization }
+UserTest >> initializeAnswers [
+	userAnswerToMe := user
+		addAnswer: 'A description'
+		answerTo: userQuestion.
+	userAnswerToOther := user
+		addAnswer: 'A description'
+		answerTo: user2Question
+]
+
+{ #category : #initialization }
+UserTest >> initializeQuestions [
+	userQuestion := user
+		addQuestion: 'A title'
+		description: 'A description'
+		topics: (topics select: [ :topic | topic name = 'Framework' ]).
+	user2Question := user2
+		addQuestion: 'A title'
+		description: 'A description'
+		topics: (topics select: [ :topic | topic name = 'Math' ]).
+	user3Question := user3
+		addQuestion: 'A title'
+		description: 'A description'
+		topics: (topics select: [ :topic | topic name = 'Framework' ])
+]
+
+{ #category : #initialization }
+UserTest >> initializeTopics [
+	topics := OrderedCollection new
+		add: (Topic name: 'Math' description: 'This topic...');
+		add: (Topic name: 'Framework' description: 'This topic...');
+		yourself
+]
+
+{ #category : #initialization }
+UserTest >> initializeUsers [
+	user := User username: 'pedro' password: 'pedro123'.
+	user2 := User username: 'luis' password: 'luis123'.
+	user3 := User username: 'maria' password: 'maria123'
 ]
 
 { #category : #running }
 UserTest >> setUp [
-	user := User username: 'pedro' password: 'pedro123'.
-	user2 := User username: 'luis' password: 'luis123'.
-	user3 := User username: 'maria' password: 'maria123'.
-	topics := OrderedCollection new
-		add: (Topic name: 'Math' description: 'This topic...');
-		add: (Topic name: 'Framework' description: 'This topic...');
-		yourself.
-	userQuestion := Question
-		author: user
-		title: 'A title'
-		description: 'A description'
-		topics: (topics select: [ :topic | topic name = 'Framework' ]).
-	user2Question := Question
-		author: user2
-		title: 'A title'
-		description: 'A description'
-		topics: (topics select: [ :topic | topic name = 'Math' ]).
-	user3Question := Question
-		author: user3
-		title: 'A title'
-		description: 'A description'
-		topics: (topics select: [ :topic | topic name = 'Framework' ]).
-	userAnswerToMe := Answer
-		author: user
-		question: userQuestion
-		description: 'A description'.
-	userAnswerToOther := Answer
-		author: user
-		question: user2Question
-		description: 'A description'
+	self initializeUsers
 ]
 
 { #category : #running }
-UserTest >> testAddAnswer [
+UserTest >> testAddAnswerAnswerTo [
+	| answer |
 	self
-		assert: user answers isEmpty;
-		assert: (user addAnswer: userAnswerToOther)
-			equals: userAnswerToOther;
+		initializeTopics;
+		initializeQuestions;
+		assert: user answers isEmpty.
+	answer := user addAnswer: 'A description' answerTo: userQuestion.
+	self
 		assert: user answers size equals: 1;
-		assert: (user answers includes: userAnswerToOther)
+		assert: (user answers includes: answer)
 ]
 
 { #category : #running }
@@ -79,17 +84,24 @@ UserTest >> testAddFollower [
 ]
 
 { #category : #running }
-UserTest >> testAddQuestion [
+UserTest >> testAddQuestionDescriptionTopics [
+	| question |
 	self
-		assert: user questions isEmpty;
-		assert: (user addQuestion: userQuestion) equals: userQuestion;
+		initializeTopics;
+		assert: user questions isEmpty.
+	question := user
+		addQuestion: 'A title'
+		description: 'A description'
+		topics: (topics select: [ :topic | topic name = 'Framework' ]).
+	self
 		assert: user questions size equals: 1;
-		assert: (user questions includes: userQuestion)
+		assert: (user questions includes: question)
 ]
 
 { #category : #running }
 UserTest >> testAddTopicOfInterest [
 	self
+		initializeTopics
 		assert: user topicsOfInterest isEmpty;
 		assert: (user addTopicOfInterest: topics first) equals: topics first;
 		assert: user topicsOfInterest size equals: 1;
@@ -99,7 +111,9 @@ UserTest >> testAddTopicOfInterest [
 { #category : #running }
 UserTest >> testCalculateScore [
 	self
-		linkQuestionsAndAnswers;
+		initializeTopics;
+		initializeQuestions;
+		initializeAnswers; 
 		assert: user calculateScore equals: 70.
 	userQuestion
 		setQualification: (Qualification author: user2 like: false).
@@ -109,6 +123,12 @@ UserTest >> testCalculateScore [
 	userAnswerToOther
 		setQualification: (Qualification author: user2 like: true).
 	self assert: user calculateScore equals: 69.
+	userQuestion
+		setQualification: (Qualification author: user2 like: true).
+	self assert: user calculateScore equals: 71.
+	userAnswerToMe
+		setQualification: (Qualification author: user3 like: true).
+	self assert: user calculateScore equals: 72.
 	userQuestion remove.
 	self assert: user calculateScore equals: 51.
 	userAnswerToOther remove.
@@ -116,11 +136,11 @@ UserTest >> testCalculateScore [
 ]
 
 { #category : #running }
-UserTest >> testFollowTo [
+UserTest >> testFollow [
 	self
 		assert: user following isEmpty;
 		assert: user2 followers isEmpty;
-		assert: (user followTo: user2) equals: user2;
+		assert: (user follow: user2) equals: user2;
 		assert: user following size equals: 1;
 		assert: (user following includes: user2);
 		assert: user2 followers size equals: 1;
@@ -130,7 +150,10 @@ UserTest >> testFollowTo [
 { #category : #running }
 UserTest >> testGetAnswersToOtherUsers [
 	| answersToOtherUsers |
-	self linkQuestionsAndAnswers.
+	self
+		initializeTopics;
+		initializeQuestions;
+		initializeAnswers.
 	answersToOtherUsers := user getAnswersToOtherUsers.
 	self
 		assert: answersToOtherUsers size equals: 1;
@@ -140,8 +163,10 @@ UserTest >> testGetAnswersToOtherUsers [
 { #category : #running }
 UserTest >> testGetRelevantQuestions [
 	| questionsOfInterest |
-	self linkQuestionsAndAnswers.
-	user followTo: user3.
+	self
+		initializeTopics;
+		initializeQuestions.
+	user follow: user3.
 	user
 		addTopicOfInterest: (topics detect: [ :topic | topic name = 'Math' ]).
 	questionsOfInterest := user getRelevantQuestions.
@@ -154,7 +179,9 @@ UserTest >> testGetRelevantQuestions [
 { #category : #running }
 UserTest >> testRemoveAnswer [
 	self
-		linkQuestionsAndAnswers;
+		initializeTopics;
+		initializeQuestions;
+		initializeAnswers;
 		assert: user answers size equals: 2;
 		assert: (user removeAnswer: userAnswerToOther)
 			equals: userAnswerToOther;
@@ -165,9 +192,10 @@ UserTest >> testRemoveAnswer [
 
 { #category : #running }
 UserTest >> testRemoveQuestion [
-
-	self linkQuestionsAndAnswers;
+	self
+		initializeTopics;
+		initializeQuestions;
 		assert: user questions size equals: 1;
 		assert: (user removeQuestion: userQuestion) equals: userQuestion;
-		assert: user questions isEmpty.
+		assert: user questions isEmpty
 ]

@@ -12,13 +12,8 @@ Class {
 }
 
 { #category : #accessing }
-Cuoora class >> instanceHHH [
-	^ instance ifNil: [ instance := super new ]
-]
-
-{ #category : #accessing }
-Cuoora class >> newHHH [
-	^ self instance
+Cuoora class >> instance [
+	^ instance ifNil: [ instance := self new ]
 ]
 
 { #category : #adding }

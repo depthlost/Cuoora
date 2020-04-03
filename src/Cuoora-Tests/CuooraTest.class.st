@@ -40,12 +40,7 @@ CuooraTest >> testAddUser [
 
 { #category : #running }
 CuooraTest >> testInstance [
-	self assert: Cuoora instance equals: cuoora
-]
-
-{ #category : #running }
-CuooraTest >> testNew [
-	self assert: Cuoora new equals: cuoora
+	self assert: Cuoora instance equals: Cuoora instance
 ]
 
 { #category : #running }
