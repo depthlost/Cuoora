@@ -1,18 +1,18 @@
 Class {
-	#name : #QualificationTest,
+	#name : #CalificationTest,
 	#superclass : #TestCase,
 	#category : #'Cuoora-Tests'
 }
 
 { #category : #tests }
-QualificationTest >> testLike [
+CalificationTest >> testLike [
 	self
 		assert:
-			(Qualification
+			(Calification
 				author: (User username: 'luis' password: 'luis123')
 				like: true) like;
 		deny:
-			(Qualification
+			(Calification
 				author: (User username: 'maria' password: 'maria123')
 				like: false) like.
 ]

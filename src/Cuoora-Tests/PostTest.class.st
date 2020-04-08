@@ -6,7 +6,7 @@ Class {
 		'defaultUser',
 		'user1',
 		'user2',
-		'defaultQualification'
+		'defaultCalification'
 	],
 	#category : #'Cuoora-Tests'
 }
@@ -21,41 +21,41 @@ PostTest >> loadUsers [
 PostTest >> setUp [
 	defaultUser := User username: 'pedro' password: 'pedro123'.
 	post := Post author: defaultUser description: 'A description...'.
-	defaultQualification := Qualification author: defaultUser like: true
+	defaultCalification := Calification author: defaultUser like: true
 ]
 
 { #category : #tests }
-PostTest >> testAddQualification [
+PostTest >> testAddCalification [
 	self
 		assert: post getLikes equals: 0;
 		assert: post getDislikes equals: 0;
-		assert: (post addQualification: defaultQualification)
-			equals: defaultQualification;
+		assert: (post addCalification: defaultCalification)
+			equals: defaultCalification;
 		assert: post getLikes equals: 1
 ]
 
 { #category : #tests }
 PostTest >> testCalculateScore [
 	self loadUsers.
-	post setQualification: (Qualification author: defaultUser like: true).
+	post setCalification: (Calification author: defaultUser like: true).
 	self assert: post calculateScore equals: 1.
-	post setQualification: (Qualification author: user1 like: true).
+	post setCalification: (Calification author: user1 like: true).
 	self assert: post calculateScore equals: 2.
-	post setQualification: (Qualification author: user2 like: false).
+	post setCalification: (Calification author: user2 like: false).
 	self assert: post calculateScore equals: 1.
 	post
-		setQualification: (Qualification author: defaultUser like: false).
+		setCalification: (Calification author: defaultUser like: false).
 	self assert: post calculateScore equals: -1
 ]
 
 { #category : #tests }
-PostTest >> testIsLikeQualificationOf [
-	self assert: (post isLikeQualificationOf: defaultUser) equals: nil.
-	post setQualification: (Qualification author: defaultUser like: true).
-	self assert: (post isLikeQualificationOf: defaultUser).
+PostTest >> testIsLikeCalificationOf [
+	self assert: (post isLikeCalificationOf: defaultUser) equals: nil.
+	post setCalification: (Calification author: defaultUser like: true).
+	self assert: (post isLikeCalificationOf: defaultUser).
 	post
-		setQualification: (Qualification author: defaultUser like: false).
-	self deny: (post isLikeQualificationOf: defaultUser)
+		setCalification: (Calification author: defaultUser like: false).
+	self deny: (post isLikeCalificationOf: defaultUser)
 ]
 
 { #category : #tests }
@@ -67,31 +67,31 @@ PostTest >> testPostedBy [
 ]
 
 { #category : #tests }
-PostTest >> testRemoveQualification [
+PostTest >> testRemoveCalification [
 	self
 		loadUsers;
-		assert: (post removeQualification: defaultUser) equals: nil.
-	post setQualification: defaultQualification.
+		assert: (post removeCalification: defaultUser) equals: nil.
+	post setCalification: defaultCalification.
 	self
-		assert: (post removeQualification: defaultUser)
-			equals: defaultQualification;
-		assert: (post isLikeQualificationOf: defaultUser) equals: nil
+		assert: (post removeCalification: defaultUser)
+			equals: defaultCalification;
+		assert: (post isLikeCalificationOf: defaultUser) equals: nil
 ]
 
 { #category : #tests }
-PostTest >> testSetQualification [
-	| qualificationUser1 |
+PostTest >> testSetCalification [
+	| calificationUser1 |
 	self
 		loadUsers;
-		assert: (post isLikeQualificationOf: user1) equals: nil.
-	qualificationUser1 := Qualification author: user1 like: true.
+		assert: (post isLikeCalificationOf: user1) equals: nil.
+	calificationUser1 := Calification author: user1 like: true.
 	self
-		assert: (post setQualification: qualificationUser1)
-			equals: qualificationUser1;
-		assert: (post isLikeQualificationOf: user1) equals: true.
-	qualificationUser1 := Qualification author: user1 like: false.
+		assert: (post setCalification: calificationUser1)
+			equals: calificationUser1;
+		assert: (post isLikeCalificationOf: user1) equals: true.
+	calificationUser1 := Calification author: user1 like: false.
 	self
-		assert: (post setQualification: qualificationUser1)
-			equals: qualificationUser1;
-		assert: (post isLikeQualificationOf: user1) equals: false
+		assert: (post setCalification: calificationUser1)
+			equals: calificationUser1;
+		assert: (post isLikeCalificationOf: user1) equals: false
 ]

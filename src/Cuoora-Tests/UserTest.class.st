@@ -116,18 +116,18 @@ UserTest >> testCalculateScore [
 		initializeAnswers; 
 		assert: user calculateScore equals: 70.
 	userQuestion
-		setQualification: (Qualification author: user2 like: false).
+		setCalification: (Calification author: user2 like: false).
 	userQuestion
-		setQualification: (Qualification author: user3 like: false).
+		setCalification: (Calification author: user3 like: false).
 	self assert: user calculateScore equals: 68.
 	userAnswerToOther
-		setQualification: (Qualification author: user2 like: true).
+		setCalification: (Calification author: user2 like: true).
 	self assert: user calculateScore equals: 69.
 	userQuestion
-		setQualification: (Qualification author: user2 like: true).
+		setCalification: (Calification author: user2 like: true).
 	self assert: user calculateScore equals: 71.
 	userAnswerToMe
-		setQualification: (Qualification author: user3 like: true).
+		setCalification: (Calification author: user3 like: true).
 	self assert: user calculateScore equals: 72.
 	userQuestion remove.
 	self assert: user calculateScore equals: 51.

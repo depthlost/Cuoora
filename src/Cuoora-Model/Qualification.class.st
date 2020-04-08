@@ -1,5 +1,5 @@
 Class {
-	#name : #Qualification,
+	#name : #Calification,
 	#superclass : #Object,
 	#instVars : [
 		'like',
@@ -10,27 +10,27 @@ Class {
 }
 
 { #category : #initialization }
-Qualification class >> author: anAuthor like: aLike [
+Calification class >> author: anAuthor like: aLike [
 	^ self new author: anAuthor like: aLike
 ]
 
 { #category : #initialization }
-Qualification >> author [
+Calification >> author [
 	^ author
 ]
 
 { #category : #initialization }
-Qualification >> author: anAuthor like: aLike [
+Calification >> author: anAuthor like: aLike [
 	author := anAuthor.
 	like := aLike
 ]
 
 { #category : #initialization }
-Qualification >> initialize [
+Calification >> initialize [
 	dateTime := DateAndTime now
 ]
 
 { #category : #initialization }
-Qualification >> like [
+Calification >> like [
 	^ like
 ]

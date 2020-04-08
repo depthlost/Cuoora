@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'description',
 		'dateTime',
-		'qualifications',
+		'califications',
 		'author'
 	],
 	#category : #'Cuoora-Model'
@@ -16,8 +16,8 @@ Post class >> author: anAuthor description: aDescription [
 ]
 
 { #category : #initialization }
-Post >> addQualification: aQualification [
-	^ qualifications add: aQualification
+Post >> addCalification: aCalification [
+	^ califications add: aCalification
 ]
 
 { #category : #initialization }
@@ -38,25 +38,25 @@ Post >> calculateScore [
 
 { #category : #initialization }
 Post >> getDislikes [
-	^ qualifications count: [ :qualification | qualification like not ]
+	^ califications count: [ :calification | calification like not ]
 ]
 
 { #category : #initialization }
 Post >> getLikes [
-	^ qualifications count: [ :qualification | qualification like ]
+	^ califications count: [ :calification | calification like ]
 ]
 
 { #category : #initialization }
 Post >> initialize [
 	dateTime := DateAndTime now.
-	qualifications := OrderedCollection new
+	califications := OrderedCollection new
 ]
 
 { #category : #initialization }
-Post >> isLikeQualificationOf: anAuthor [
-	^ qualifications
-		detect: [ :qualification | qualification author == anAuthor ]
-		ifFound: [ :qualification | qualification like ]
+Post >> isLikeCalificationOf: anAuthor [
+	^ califications
+		detect: [ :calification | calification author == anAuthor ]
+		ifFound: [ :calification | calification like ]
 		ifNone: [ nil ]
 ]
 
@@ -71,15 +71,15 @@ Post >> remove [
 ]
 
 { #category : #initialization }
-Post >> removeQualification: anAuthor [
-	^ qualifications
-		detect: [ :qualification | qualification author == anAuthor ]
-		ifFound: [ :qualification | qualifications remove: qualification ]
+Post >> removeCalification: anAuthor [
+	^ califications
+		detect: [ :calification | calification author == anAuthor ]
+		ifFound: [ :calification | califications remove: calification ]
 		ifNone: [ nil ]
 ]
 
 { #category : #initialization }
-Post >> setQualification: aQualification [
-	self removeQualification: aQualification author.
-	^ self addQualification: aQualification
+Post >> setCalification: aCalification [
+	self removeCalification: aCalification author.
+	^ self addCalification: aCalification
 ]
