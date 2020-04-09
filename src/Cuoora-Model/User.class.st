@@ -76,27 +76,15 @@ User >> following [
 ]
 
 { #category : #adding }
-User >> getAllQuestionsOfFollowings [
-	^ (following collect: [ :user | user questions ])
-		flatCollectAsSet: [ :question | question ]
-]
-
-{ #category : #adding }
-User >> getAllQuestionsOfTopicsOfInterest [
-	^ (topicsOfInterest collect: [ :topic | topic questions ])
-		flatCollectAsSet: [ :question | question ]
-]
-
-{ #category : #adding }
 User >> getAnswersToOtherUsers [
 	^ answers reject: [ :answer | answer respondsTo: self ]
 ]
 
 { #category : #adding }
 User >> getRelevantQuestions [
-	^ self getAllQuestionsOfFollowings
-		addAll: self getAllQuestionsOfTopicsOfInterest;
-		yourself
+	^ (following collect: [ :user | user questions ])
+		, (topicsOfInterest collect: [ :topic | topic questions ])
+		flatCollectAsSet: [ :question | question ]
 ]
 
 { #category : #adding }
