@@ -102,10 +102,10 @@ UserTest >> testAddQuestionDescriptionTopics [
 UserTest >> testAddTopicOfInterest [
 	self
 		initializeTopics
-		assert: user topicsOfInterest isEmpty;
+		assert: user interestTopics isEmpty;
 		assert: (user addTopicOfInterest: topics first) equals: topics first;
-		assert: user topicsOfInterest size equals: 1;
-		assert: (user topicsOfInterest includes: topics first)
+		assert: user interestTopics size equals: 1;
+		assert: (user interestTopics includes: topics first)
 ]
 
 { #category : #running }
@@ -138,11 +138,11 @@ UserTest >> testCalculateScore [
 { #category : #running }
 UserTest >> testFollow [
 	self
-		assert: user following isEmpty;
+		assert: user followings isEmpty;
 		assert: user2 followers isEmpty;
 		assert: (user follow: user2) equals: user2;
-		assert: user following size equals: 1;
-		assert: (user following includes: user2);
+		assert: user followings size equals: 1;
+		assert: (user followings includes: user2);
 		assert: user2 followers size equals: 1;
 		assert: (user2 followers includes: user)
 ]

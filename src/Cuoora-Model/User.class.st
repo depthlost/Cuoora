@@ -2,9 +2,9 @@ Class {
 	#name : #User,
 	#superclass : #Object,
 	#instVars : [
-		'following',
+		'followings',
 		'followers',
-		'topicsOfInterest',
+		'interestTopics',
 		'questions',
 		'answers',
 		'username',
@@ -43,7 +43,7 @@ User >> addQuestion: aTitle description: aDescription topics: someTopics [
 
 { #category : #adding }
 User >> addTopicOfInterest: aTopic [
-	^ topicsOfInterest add: aTopic
+	^ interestTopics add: aTopic
 ]
 
 { #category : #adding }
@@ -62,7 +62,7 @@ User >> calculateScore [
 { #category : #adding }
 User >> follow: aUser [
 	aUser addFollower: self.
-	^ following add: aUser
+	^ followings add: aUser
 ]
 
 { #category : #adding }
@@ -71,8 +71,8 @@ User >> followers [
 ]
 
 { #category : #adding }
-User >> following [
-	^ following
+User >> followings [
+	^ followings
 ]
 
 { #category : #adding }
@@ -82,18 +82,18 @@ User >> getAnswersToOtherUsers [
 
 { #category : #adding }
 User >> getRelevantQuestions [
-	^ (following collect: [ :user | user questions ])
-		, (topicsOfInterest collect: [ :topic | topic questions ])
+	^ (followings collect: [ :user | user questions ])
+		, (interestTopics collect: [ :topic | topic questions ])
 		flatCollectAsSet: [ :question | question ]
 ]
 
 { #category : #adding }
 User >> initialize [
 	followers := OrderedCollection new.
-	following := OrderedCollection new.
+	followings := OrderedCollection new.
 	answers := OrderedCollection new.
 	questions := OrderedCollection new.
-	topicsOfInterest := OrderedCollection new.
+	interestTopics := OrderedCollection new.
 	dateTime := DateAndTime now
 ]
 
@@ -113,8 +113,8 @@ User >> removeQuestion: aQuestion [
 ]
 
 { #category : #adding }
-User >> topicsOfInterest [
-	^ topicsOfInterest
+User >> interestTopics [
+	^ interestTopics
 ]
 
 { #category : #adding }
