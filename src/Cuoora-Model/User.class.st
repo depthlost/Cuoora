@@ -2,7 +2,7 @@ Class {
 	#name : #User,
 	#superclass : #Object,
 	#instVars : [
-		'followings',
+		'following',
 		'followers',
 		'interestTopics',
 		'questions',
@@ -62,7 +62,7 @@ User >> calculateScore [
 { #category : #adding }
 User >> follow: aUser [
 	aUser addFollower: self.
-	^ followings add: aUser
+	^ following add: aUser
 ]
 
 { #category : #adding }
@@ -71,8 +71,8 @@ User >> followers [
 ]
 
 { #category : #adding }
-User >> followings [
-	^ followings
+User >> following [
+	^ following
 ]
 
 { #category : #adding }
@@ -82,7 +82,7 @@ User >> getAnswersToOtherUsers [
 
 { #category : #adding }
 User >> getRelevantQuestions [
-	^ (followings collect: [ :user | user questions ])
+	^ (following collect: [ :user | user questions ])
 		, (interestTopics collect: [ :topic | topic questions ])
 		flatCollectAsSet: [ :question | question ]
 ]
@@ -90,7 +90,7 @@ User >> getRelevantQuestions [
 { #category : #adding }
 User >> initialize [
 	followers := OrderedCollection new.
-	followings := OrderedCollection new.
+	following := OrderedCollection new.
 	answers := OrderedCollection new.
 	questions := OrderedCollection new.
 	interestTopics := OrderedCollection new.
