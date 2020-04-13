@@ -12,6 +12,11 @@ Class {
 }
 
 { #category : #accessing }
+Cuoora class >> clearInstance [
+	instance := nil
+]
+
+{ #category : #accessing }
 Cuoora class >> instance [
 	^ instance ifNil: [ instance := self new ]
 ]

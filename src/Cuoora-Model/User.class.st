@@ -98,6 +98,11 @@ User >> initialize [
 ]
 
 { #category : #adding }
+User >> interestTopics [
+	^ interestTopics
+]
+
+{ #category : #adding }
 User >> questions [
 	^ questions
 ]
@@ -110,11 +115,6 @@ User >> removeAnswer: anAnswer [
 { #category : #adding }
 User >> removeQuestion: aQuestion [
 	^ questions remove: aQuestion
-]
-
-{ #category : #adding }
-User >> interestTopics [
-	^ interestTopics
 ]
 
 { #category : #adding }

@@ -31,7 +31,7 @@ Answer >> remove [
 ]
 
 { #category : #accessing }
-Answer >> removeFromAutor [
+Answer >> removeFromAuthor [
 	author removeAnswer: self
 ]
 

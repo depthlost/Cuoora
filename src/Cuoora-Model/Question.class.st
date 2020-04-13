@@ -34,7 +34,7 @@ Question >> initialize [
 
 { #category : #accessing }
 Question >> remove [
-	answers do: [ :answer | answer removeFromAutor ].
+	answers do: [ :answer | answer removeFromAuthor ].
 	topics do: [ :topic | topic removeQuestion: self ].
 	author removeQuestion: self
 ]
@@ -42,6 +42,11 @@ Question >> remove [
 { #category : #accessing }
 Question >> removeAnswer: anAnswer [
 	^ answers remove: anAnswer.
+]
+
+{ #category : #accessing }
+Question >> title [
+	^ title
 ]
 
 { #category : #initialization }

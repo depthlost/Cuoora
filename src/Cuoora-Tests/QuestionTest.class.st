@@ -45,15 +45,6 @@ QuestionTest >> initializeUsers [
 	user2 := User username: 'lino' password: 'lino123'
 ]
 
-{ #category : #initialization }
-QuestionTest >> linkData [
-	author addQuestion: question.
-	question
-		addAnswer: answer1;
-		addAnswer: answer2;
-		addAnswer: answer3
-]
-
 { #category : #running }
 QuestionTest >> setUp [
 	self
@@ -81,4 +72,18 @@ QuestionTest >> testRemove [
 	topicsOfQuestion := question topics.
 	authorsOfResponses := (question answers collect: [ :answer | answer author]) asSet.
 	question remove.
+]
+
+{ #category : #tests }
+QuestionTest >> testRemoveAnswer [
+	self
+		assert: question answers isEmpty;
+		initializeAnswers;
+		assert: question answers size equals: 3.
+	question removeAnswer: answer2.
+	self assert: question answers size equals: 2.
+	question
+		removeAnswer: answer1;
+		removeAnswer: answer3.
+	self assert: question answers isEmpty
 ]

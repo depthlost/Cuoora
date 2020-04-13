@@ -35,6 +35,13 @@ AnswerTest >> testRemove [
 ]
 
 { #category : #tests }
+AnswerTest >> testRemoveFromAuthor [
+	self assert: (answer author answers includes: answer).
+	answer removeFromAuthor.
+	self deny: (answer author answers includes: answer)
+]
+
+{ #category : #tests }
 AnswerTest >> testRespondsTo [
 	self
 		assert: (answer respondsTo: question author);
