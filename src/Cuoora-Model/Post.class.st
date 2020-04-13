@@ -16,8 +16,8 @@ Post class >> author: anAuthor description: aDescription [
 ]
 
 { #category : #initialization }
-Post >> addCalification: aCalification [
-	^ califications add: aCalification
+Post >> addCalificationOf: anAuthor isLike: aLike [
+	califications at: anAuthor put: (Calification like: aLike)
 ]
 
 { #category : #initialization }
@@ -37,6 +37,11 @@ Post >> calculateScore [
 ]
 
 { #category : #initialization }
+Post >> dateAndTime [
+	^ dateTime
+]
+
+{ #category : #initialization }
 Post >> getDislikes [
 	^ califications count: [ :calification | calification like not ]
 ]
@@ -49,15 +54,13 @@ Post >> getLikes [
 { #category : #initialization }
 Post >> initialize [
 	dateTime := DateAndTime now.
-	califications := OrderedCollection new
+	califications := Dictionary new
 ]
 
 { #category : #initialization }
 Post >> isLikeCalificationOf: anAuthor [
-	^ califications
-		detect: [ :calification | calification author == anAuthor ]
-		ifFound: [ :calification | calification like ]
-		ifNone: [ nil ]
+	^ (califications at: anAuthor ifAbsent: [ nil ])
+		ifNotNil: [ :calification | calification like ]
 ]
 
 { #category : #initialization }
@@ -71,15 +74,6 @@ Post >> remove [
 ]
 
 { #category : #initialization }
-Post >> removeCalification: anAuthor [
-	^ califications
-		detect: [ :calification | calification author == anAuthor ]
-		ifFound: [ :calification | califications remove: calification ]
-		ifNone: [ nil ]
-]
-
-{ #category : #initialization }
-Post >> setCalification: aCalification [
-	self removeCalification: aCalification author.
-	^ self addCalification: aCalification
+Post >> removeCalificationOf: anAuthor [
+	califications removeKey: anAuthor
 ]

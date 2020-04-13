@@ -3,26 +3,14 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'like',
-		'dateTime',
-		'author'
+		'dateTime'
 	],
 	#category : #'Cuoora-Model'
 }
 
 { #category : #initialization }
-Calification class >> author: anAuthor like: aLike [
-	^ self new author: anAuthor like: aLike
-]
-
-{ #category : #initialization }
-Calification >> author [
-	^ author
-]
-
-{ #category : #initialization }
-Calification >> author: anAuthor like: aLike [
-	author := anAuthor.
-	like := aLike
+Calification class >> like: aLike [
+	^ self new like: aLike
 ]
 
 { #category : #initialization }
@@ -33,4 +21,9 @@ Calification >> initialize [
 { #category : #initialization }
 Calification >> like [
 	^ like
+]
+
+{ #category : #initialization }
+Calification >> like: aLike [
+	like := aLike
 ]

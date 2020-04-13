@@ -113,24 +113,24 @@ UserTest >> testCalculateScore [
 	self
 		initializeTopics;
 		initializeQuestions;
-		initializeAnswers; 
+		initializeAnswers;
 		assert: user calculateScore equals: 70.
-	userQuestion
-		setCalification: (Calification author: user2 like: false).
-	userQuestion
-		setCalification: (Calification author: user3 like: false).
+	userQuestion addCalificationOf: user2 isLike: false.
+	userQuestion addCalificationOf: user3 isLike: false.
 	self assert: user calculateScore equals: 68.
-	userAnswerToOther
-		setCalification: (Calification author: user2 like: true).
+	
+	userAnswerToOther addCalificationOf: user2 isLike: true.
 	self assert: user calculateScore equals: 69.
-	userQuestion
-		setCalification: (Calification author: user2 like: true).
+	
+	userQuestion addCalificationOf: user2 isLike: true.
 	self assert: user calculateScore equals: 71.
-	userAnswerToMe
-		setCalification: (Calification author: user3 like: true).
+	
+	userAnswerToMe addCalificationOf: user3 isLike: true.
 	self assert: user calculateScore equals: 72.
+	
 	userQuestion remove.
 	self assert: user calculateScore equals: 51.
+	
 	userAnswerToOther remove.
 	self assert: user calculateScore equals: 0
 ]
