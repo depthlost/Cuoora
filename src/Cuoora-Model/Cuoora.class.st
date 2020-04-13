@@ -48,6 +48,13 @@ Cuoora >> topics: topicsNames [
 ]
 
 { #category : #adding }
+Cuoora >> userWithUsername: anUsername andPassword: aPassword [
+	^ users
+		detect: [ :user | user username = anUsername & (user password = aPassword) ]
+		ifNone: [ nil ]
+]
+
+{ #category : #adding }
 Cuoora >> users [
 	^ users
 ]
