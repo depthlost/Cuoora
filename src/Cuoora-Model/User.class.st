@@ -31,6 +31,11 @@ User >> addFollower: aFollower [
 ]
 
 { #category : #adding }
+User >> addInterestTopic: aTopic [
+	^ interestTopics add: aTopic
+]
+
+{ #category : #adding }
 User >> addQuestion: aTitle description: aDescription topics: someTopics [
 	^ questions
 		add:
@@ -39,11 +44,6 @@ User >> addQuestion: aTitle description: aDescription topics: someTopics [
 				title: aTitle
 				description: aDescription
 				topics: someTopics)
-]
-
-{ #category : #adding }
-User >> addInterestTopic: aTopic [
-	^ interestTopics add: aTopic
 ]
 
 { #category : #adding }
@@ -102,6 +102,11 @@ User >> interestTopics [
 	^ interestTopics
 ]
 
+{ #category : #accessing }
+User >> password [
+	^ password
+]
+
 { #category : #adding }
 User >> questions [
 	^ questions
@@ -115,6 +120,11 @@ User >> removeAnswer: anAnswer [
 { #category : #adding }
 User >> removeQuestion: aQuestion [
 	^ questions remove: aQuestion
+]
+
+{ #category : #accessing }
+User >> username [
+	^ username
 ]
 
 { #category : #adding }

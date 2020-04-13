@@ -84,6 +84,16 @@ UserTest >> testAddFollower [
 ]
 
 { #category : #running }
+UserTest >> testAddInterestTopic [
+	self
+		initializeTopics
+		assert: user interestTopics isEmpty;
+		assert: (user addInterestTopic: topics first) equals: topics first;
+		assert: user interestTopics size equals: 1;
+		assert: (user interestTopics includes: topics first)
+]
+
+{ #category : #running }
 UserTest >> testAddQuestionDescriptionTopics [
 	| question |
 	self
@@ -96,16 +106,6 @@ UserTest >> testAddQuestionDescriptionTopics [
 	self
 		assert: user questions size equals: 1;
 		assert: (user questions includes: question)
-]
-
-{ #category : #running }
-UserTest >> testAddInterestTopic [
-	self
-		initializeTopics
-		assert: user interestTopics isEmpty;
-		assert: (user addInterestTopic: topics first) equals: topics first;
-		assert: user interestTopics size equals: 1;
-		assert: (user interestTopics includes: topics first)
 ]
 
 { #category : #running }

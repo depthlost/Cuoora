@@ -63,3 +63,17 @@ CuooraTest >> testTopics [
 		assert: nTopics size equals: 1;
 		assert: (nTopics includes: topic1)
 ]
+
+{ #category : #running }
+CuooraTest >> testUserWithUsernameAndPassword [
+	cuoora
+		addUser: user1;
+		addUser: user2.
+	self
+		assert: (cuoora userWithUsername: 'maria' andPassword: 'maria123') == user1;
+		assert: (cuoora userWithUsername: 'pedro' andPassword: 'pedro20')
+			equals: nil;
+		assert: (cuoora userWithUsername: 'pedrogomez' andPassword: 'pedro123')
+			equals: nil;
+		assert: (cuoora userWithUsername: 'pedro' andPassword: 'pedro123') == user2
+]
