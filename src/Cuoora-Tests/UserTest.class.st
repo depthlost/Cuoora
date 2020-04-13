@@ -99,11 +99,11 @@ UserTest >> testAddQuestionDescriptionTopics [
 ]
 
 { #category : #running }
-UserTest >> testAddTopicOfInterest [
+UserTest >> testAddInterestTopic [
 	self
 		initializeTopics
 		assert: user interestTopics isEmpty;
-		assert: (user addTopicOfInterest: topics first) equals: topics first;
+		assert: (user addInterestTopic: topics first) equals: topics first;
 		assert: user interestTopics size equals: 1;
 		assert: (user interestTopics includes: topics first)
 ]
@@ -168,7 +168,7 @@ UserTest >> testGetRelevantQuestions [
 		initializeQuestions.
 	user follow: user3.
 	user
-		addTopicOfInterest: (topics detect: [ :topic | topic name = 'Math' ]).
+		addInterestTopic: (topics detect: [ :topic | topic name = 'Math' ]).
 	questionsOfInterest := user getRelevantQuestions.
 	self
 		assert: questionsOfInterest size equals: 2;

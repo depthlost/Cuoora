@@ -42,7 +42,7 @@ User >> addQuestion: aTitle description: aDescription topics: someTopics [
 ]
 
 { #category : #adding }
-User >> addTopicOfInterest: aTopic [
+User >> addInterestTopic: aTopic [
 	^ interestTopics add: aTopic
 ]
 
