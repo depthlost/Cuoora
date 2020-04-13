@@ -138,11 +138,11 @@ UserTest >> testCalculateScore [
 { #category : #running }
 UserTest >> testFollow [
 	self
-		assert: user followings isEmpty;
+		assert: user following isEmpty;
 		assert: user2 followers isEmpty;
 		assert: (user follow: user2) equals: user2;
-		assert: user followings size equals: 1;
-		assert: (user followings includes: user2);
+		assert: user following size equals: 1;
+		assert: (user following includes: user2);
 		assert: user2 followers size equals: 1;
 		assert: (user2 followers includes: user)
 ]
