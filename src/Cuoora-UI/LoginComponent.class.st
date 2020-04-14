@@ -26,7 +26,8 @@ LoginComponent >> login [
 		andPassword: self password ).
 	userSession ifNil: [ ^ self ].
 	self session user: userSession.
-	self call: (SessionComponent bodyComponent: HomeComponent new)
+	self call: (SessionComponent bodyComponent: HomeComponent new).
+	self password: nil
 ]
 
 { #category : #accessing }

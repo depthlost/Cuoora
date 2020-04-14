@@ -11,7 +11,7 @@ HomeComponent >> qualifyPost: post isLike: bool [
 
 { #category : #rendering }
 HomeComponent >> renderContentOn: html [
-	html text: 'Ultimas preguntas'.
+	html header: 'Ultimas preguntas'.
 	html paragraph: [ self renderQuestionsOn: html ]
 ]
 
@@ -22,17 +22,16 @@ HomeComponent >> renderNewQuestionOn: html [
 
 { #category : #rendering }
 HomeComponent >> renderQuestionsOn: html [
- | questions |
-	questions := (self session user getRelevantQuestions ).
-	 (questions size < 5) ifFalse: [questions := questions first: 5].
-		questions do: [ :each | 
-			html header: each title.
-			html text: 'Realizada por '.
-			html text: each author.
-			html number: each answers size.
-			html text: ' respuestas'.
-			html number: each getLikes.
-			html text: 'likes'.
-			html number: each getDislikes.
-			html text: 'dislikes' ]
+	(self session user getRelevantQuestions takeFirst: 5)
+		do: [ :each | html
+			header: each title;
+			text: 'Realizada por ';
+			text: each author;
+			number: each answers size;
+			text: ' respuestas';
+			number: each getLikes;
+			text: 'likes';
+			number: each getDislikes;
+			text: 'dislikes';
+			space ]
 ]
