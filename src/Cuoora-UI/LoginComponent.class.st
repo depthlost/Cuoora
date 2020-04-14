@@ -9,10 +9,11 @@ LoginComponent >> login [
 ]
 
 { #category : #rendering }
-LoginComponent >> renderContentOn: html [ 
-	html textInput on: 'username' of: self.
-	html textInput on: 'password' of: self.
-	html button 
-		callback: [ self login ];
-		with: 'Iniciar Sesion'
+LoginComponent >> renderContentOn: html [
+	html
+		form: [ html paragraph: [ html textInput on: 'username' of: self ].
+			html paragraph: [ html textInput on: 'password' of: self ].
+			html button
+				callback: [ self login ];
+				with: 'Iniciar Sesion' ]
 ]
