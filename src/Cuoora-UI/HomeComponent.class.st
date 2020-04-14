@@ -23,15 +23,16 @@ HomeComponent >> renderNewQuestionOn: html [
 { #category : #rendering }
 HomeComponent >> renderQuestionsOn: html [
 	(self session user getRelevantQuestions takeFirst: 5)
-		do: [ :each | html
-			header: each title;
-			text: 'Realizada por ';
-			text: each author;
-			number: each answers size;
-			text: ' respuestas';
-			number: each getLikes;
-			text: 'likes';
-			number: each getDislikes;
-			text: 'dislikes';
-			space ]
+		do: [ :each | 
+			html
+				header: each title;
+				text: 'Realizada por ';
+				text: each author;
+				text: each answers size;
+				text: ' respuestas';
+				text: each getLikes;
+				text: 'likes';
+				text: each getDislikes;
+				text: 'dislikes';
+				space ]
 ]
