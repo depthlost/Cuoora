@@ -27,7 +27,7 @@ HomeComponent >> renderQuestionsOn: html [
 			html
 				header: each title;
 				text: 'Realizada por ';
-				text: each author;
+				text: each author username;
 				text: each answers size;
 				text: ' respuestas';
 				text: each getLikes;
