@@ -22,8 +22,10 @@ HomeComponent >> renderNewQuestionOn: html [
 
 { #category : #rendering }
 HomeComponent >> renderQuestionsOn: html [
-	(self session user getRelevantQuestions first: 5)
-		do: [ :each | 
+ | questions |
+	questions := (self session user getRelevantQuestions ).
+	 (questions size < 5) ifFalse: [questions := questions first: 5].
+		questions do: [ :each | 
 			html header: each title.
 			html text: 'Realizada por '.
 			html text: each author.
