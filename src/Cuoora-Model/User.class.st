@@ -82,9 +82,9 @@ User >> getAnswersToOtherUsers [
 
 { #category : #adding }
 User >> getRelevantQuestions [
-	^ (following collect: [ :user | user questions ])
+	^ ((following collect: [ :user | user questions ])
 		, (interestTopics collect: [ :topic | topic questions ])
-		flatCollectAsSet: [ :question | question ]
+		flatCollectAsSet: [ :question | question ]) asOrderedCollection
 ]
 
 { #category : #adding }
