@@ -24,6 +24,8 @@ Question >> addAnswer: anAnswer [
 { #category : #accessing }
 Question >> answers [
 	^ answers
+		sort:
+			[ :answerOne :answerTwo | answerOne calculateScore > answerTwo calculateScore ]
 ]
 
 { #category : #initialization }

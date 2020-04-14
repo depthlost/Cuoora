@@ -3,6 +3,10 @@
 application := WAAdmin register: LoginComponent asApplicationAt: '/cuoora'.
 application sessionClass: UserSession.
 
+Cuoora instance addUser: (User username: 'kass' password: 'juan').
+Cuoora instance addUser: (User username: 'depthlost' password: 'depth').
+
+
 "
 Class {
 	#name : #LoginComponent,
