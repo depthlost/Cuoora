@@ -20,12 +20,12 @@ Class {
 
 { #category : #'private protocol' }
 LoginComponent >> login [
-	| user |
-	user := Cuoora instance
+	| userSession |
+	userSession := ( Cuoora instance
 		userWithUsername: self username
-		andPassword: self password.
-	user ifNil: [ ^ self ].
-	self session user: user.
+		andPassword: self password ).
+	userSession ifNil: [ ^ self ].
+	self session user: userSession.
 	self call: (SessionComponent bodyComponent: HomeComponent new)
 ]
 
