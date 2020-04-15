@@ -9,7 +9,7 @@ NewQuestionComponent >> renderContentOn: html [
 
 html header: 'Nueva pregunta'.
 html space.
-html renderNewQuestion: html.
+self renderNewQuestion: html.
 ]
 
 { #category : #rendering }
