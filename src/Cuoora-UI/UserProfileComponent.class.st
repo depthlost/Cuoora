@@ -7,9 +7,14 @@ Class {
 	#category : #'Cuoora-UI'
 }
 
+{ #category : #'instance creation' }
+UserProfileComponent class >> with: anUser [
+	^ self new with: anUser
+]
+
 { #category : #rendering }
 UserProfileComponent >> renderContentOn: html [
-	html header: 'Preguntas de ' + self session user.
+	html header: 'Preguntas de ', user username.
 	self renderQuestionsOn: html
 ]
 
@@ -18,4 +23,9 @@ UserProfileComponent >> renderQuestionsOn: html [
 	user questions
 		do:
 			[ :each | self call: (QuestionComponent post: each changeComponent: self) ]
+]
+
+{ #category : #'instance creation' }
+UserProfileComponent >> with: anUser [
+	user := anUser
 ]
