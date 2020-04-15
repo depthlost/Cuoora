@@ -15,6 +15,7 @@ UserProfileComponent class >> with: anUser [
 { #category : #rendering }
 UserProfileComponent >> renderContentOn: html [
 	html header: 'Preguntas de ', user username.
+	html space.
 	self renderQuestionsOn: html
 ]
 
