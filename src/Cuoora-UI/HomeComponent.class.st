@@ -4,6 +4,15 @@ Class {
 	#category : #'Cuoora-UI'
 }
 
+{ #category : #adding }
+HomeComponent >> addAnswer [
+]
+
+{ #category : #adding }
+HomeComponent >> addQuestion [
+	self call: NewQuestionComponent new
+]
+
 { #category : #rendering }
 HomeComponent >> qualifyPost: post isLike: bool [
 	
