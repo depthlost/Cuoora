@@ -20,6 +20,9 @@ HomeComponent >> qualifyPost: post isLike: bool [
 
 { #category : #rendering }
 HomeComponent >> renderContentOn: html [
+	html button
+		callback: [ self addQuestion ];
+		with: 'Hacer una nueva pregunta'.
 	html header: 'Ultimas preguntas'.
 	html paragraph: [ self renderQuestionsOn: html ]
 ]
