@@ -23,7 +23,7 @@ UserProfileComponent >> renderContentOn: html [
 UserProfileComponent >> renderQuestionsOn: html [
 	user questions
 		do:
-			[ :each | self call: (QuestionComponent post: each changeComponent: self) ]
+			[ :each | html render: (QuestionComponent with: each andChangeComponent: self) ]
 ]
 
 { #category : #'instance creation' }

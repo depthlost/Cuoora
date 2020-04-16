@@ -1,3 +1,7 @@
+"
+CuooraSample make.
+
+"
 Class {
 	#name : #CuooraSample,
 	#superclass : #Object,
@@ -16,7 +20,7 @@ CuooraSample class >> make [
 	self new
 ]
 
-{ #category : #adding }
+{ #category : #initialization }
 CuooraSample >> addAnswers [
 	userDiego
 		addAnswer:
@@ -28,13 +32,13 @@ CuooraSample >> addAnswers [
 		answerTo: questionDiego
 ]
 
-{ #category : #adding }
+{ #category : #initialization }
 CuooraSample >> addFollowups [
 	userJuan follow: userDiego.
 	userPedro follow: userJuan
 ]
 
-{ #category : #adding }
+{ #category : #initialization }
 CuooraSample >> addQuestions [
 	questionPedro := userPedro
 		addQuestion: '¿Para qué sirve el método SetUp?'
@@ -46,7 +50,15 @@ CuooraSample >> addQuestions [
 		topics: (Cuoora instance topics: #('OO1' 'Smalltalk'))
 ]
 
-{ #category : #adding }
+{ #category : #initialization }
+CuooraSample >> addTopics [
+	Cuoora instance
+		addTopic: (Topic name: 'OO1' description: '');
+		addTopic: (Topic name: 'Test de unidad' description: '');
+		addTopic: (Topic name: 'Smalltalk' description: '')
+]
+
+{ #category : #initialization }
 CuooraSample >> addUsers [
 	userPedro := User
 		username: 'pedro@cuoora.com'
@@ -69,6 +81,7 @@ CuooraSample >> initialize [
 	self
 		addUsers;
 		addFollowups;
+		addTopics;
 		addQuestions;
-		addAnswers.
+		addAnswers
 ]

@@ -42,6 +42,11 @@ Post >> dateAndTime [
 ]
 
 { #category : #initialization }
+Post >> description [
+	^ description
+]
+
+{ #category : #initialization }
 Post >> getDislikes [
 	^ califications count: [ :calification | calification like not ]
 ]
