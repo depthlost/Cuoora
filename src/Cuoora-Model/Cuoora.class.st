@@ -27,6 +27,11 @@ Cuoora >> addTopic: aTopic [
 ]
 
 { #category : #adding }
+Cuoora >> addTopics: someTopics [
+	someTopics do: [ :topic | self addTopic: topic ]
+]
+
+{ #category : #adding }
 Cuoora >> addUser: anUser [
 	^ users add: anUser
 ]
@@ -34,7 +39,7 @@ Cuoora >> addUser: anUser [
 { #category : #initialization }
 Cuoora >> initialize [
 	users := OrderedCollection new.
-	topics := OrderedCollection new
+	topics := Set new
 ]
 
 { #category : #adding }

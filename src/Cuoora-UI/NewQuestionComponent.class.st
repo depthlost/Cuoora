@@ -19,12 +19,21 @@ NewQuestionComponent >> renderContentOn: html [
 { #category : #rendering }
 NewQuestionComponent >> renderDataInputOn: html [
 	html
-		form: [ html label: 'Título: '.
+		form: [ html
+				label: 'Título:';
+				space.
 			html textInput callback: [ :input | title := input ].
-			html label: 'Desarrollo: '.
-			html textInput callback: [ :input | description := input ].
-			html label: 'Tópicos: '.
-			html textInput callback: [ :input | topics := input splitOn: ','].
+			html
+				break;
+				label: 'Desarrollo:';
+				space.
+			html textArea callback: [ :input | description := input ].
+			html
+				break;
+				label: 'Tópicos:';
+				space.
+			html textInput callback: [ :input | topics := input splitOn: ',' ].
+			html break.
 			html button
 				callback: [ self answer ];
 				with: 'Cancelar'.
@@ -35,9 +44,11 @@ NewQuestionComponent >> renderDataInputOn: html [
 
 { #category : #rendering }
 NewQuestionComponent >> save [
+	Cuoora instance
+		addTopics: (topics collect: [ :topic | Topic name: topic description: '' ]).
 	self session user
 		addQuestion: title
 		description: description
-		topics: (Cuoora instance topics: (topics splitOn: ',')).
+		topics: (Cuoora instance topics: topics).
 	self answer
 ]

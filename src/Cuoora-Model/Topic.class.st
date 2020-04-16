@@ -16,6 +16,11 @@ Topic class >> name: aName description: aDescription [
 ]
 
 { #category : #initialization }
+Topic >> = otherTopic [
+	^ name = otherTopic name
+]
+
+{ #category : #initialization }
 Topic >> addQuestion: aQuestion [
 	^ questions add: aQuestion
 ]

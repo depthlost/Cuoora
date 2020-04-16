@@ -18,6 +18,11 @@ SessionComponent >> bodyComponent: aBodyComponent [
 ]
 
 { #category : #rendering }
+SessionComponent >> goToUserProfile [
+	bodyComponent call: (UserProfileComponent with: self session user)
+]
+
+{ #category : #rendering }
 SessionComponent >> logout [
 	self answer
 ]
@@ -31,10 +36,11 @@ SessionComponent >> renderContentOn: html [
 
 { #category : #rendering }
 SessionComponent >> renderHeadOn: html [
-	html
-		heading: 'CuOOra';
-		text: self session user username;
-		space.
+	html heading: 'CuOOra'.
+	html anchor
+		callback: [ self goToUserProfile ];
+		with: self session user username.
+	html space.
 	html anchor
 		callback: [ self logout ];
 		with: 'Log out'

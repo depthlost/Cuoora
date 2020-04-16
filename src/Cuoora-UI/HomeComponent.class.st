@@ -10,22 +10,19 @@ HomeComponent >> addQuestion [
 ]
 
 { #category : #rendering }
-HomeComponent >> qualifyPost: post isLike: bool [
-	
-]
-
-{ #category : #rendering }
 HomeComponent >> renderContentOn: html [
-	html button
-		callback: [ self addQuestion ];
-		with: 'Hacer una nueva pregunta'.
-	html header: 'Ultimas preguntas'.
+	self renderNewQuestionOn: html.
+	html heading
+		level2;
+		with: 'Ultimas preguntas'.
 	html paragraph: [ self renderQuestionsOn: html ]
 ]
 
 { #category : #rendering }
 HomeComponent >> renderNewQuestionOn: html [
-	
+	html anchor
+		callback: [ self addQuestion ];
+		with: 'Hacer una nueva pregunta'
 ]
 
 { #category : #rendering }
@@ -34,4 +31,5 @@ HomeComponent >> renderQuestionsOn: html [
 		do: [ :question | 
 			html
 				render: (QuestionComponent with: question andChangeComponent: self) ]
+		separatedBy: [ html horizontalRule ]
 ]
