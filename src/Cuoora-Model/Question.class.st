@@ -24,7 +24,7 @@ Question >> addAnswer: anAnswer [
 { #category : #accessing }
 Question >> answers [
 	^ answers
-		sort:
+		asSortedCollection:
 			[ :answerOne :answerTwo | answerOne calculateScore > answerTwo calculateScore ]
 ]
 

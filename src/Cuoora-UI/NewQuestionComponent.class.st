@@ -1,37 +1,43 @@
 Class {
 	#name : #NewQuestionComponent,
 	#superclass : #WAComponent,
+	#instVars : [
+		'title',
+		'description',
+		'topics'
+	],
 	#category : #'Cuoora-UI'
 }
 
 { #category : #rendering }
-NewQuestionComponent >> renderContentOn: html [ 
-
-html header: 'Nueva pregunta'.
-html space.
-self renderNewQuestion: html.
+NewQuestionComponent >> renderContentOn: html [
+	html header: 'Nueva pregunta'.
+	html break.
+	self renderDataInputOn: html
 ]
 
 { #category : #rendering }
-NewQuestionComponent >> renderNewQuestion: html [
-	| question |
-	question := Question new.
+NewQuestionComponent >> renderDataInputOn: html [
 	html
-		form: [ html
-				paragraph: [ html label: 'Título: '.
-					html textInput on: #title of: question ] ].
-	html
-		form: [ html
-				paragraph: [ html label: 'Desarrollo: '.
-					html textInput on: #description of: question ] ].
-	html
-		form: [ html
-				paragraph: [ html label: 'Tópicos: '.
-					html textInput on: #topics of: question ] ].
-	html button
-		callback: [  ];
-		with: 'Cancelar'.
-	html button
-		callback: [  ];
-		with: 'Guardar'
+		form: [ html label: 'Título: '.
+			html textInput callback: [ :input | title := input ].
+			html label: 'Desarrollo: '.
+			html textInput callback: [ :input | description := input ].
+			html label: 'Tópicos: '.
+			html textInput callback: [ :input | topics := input splitOn: ','].
+			html button
+				callback: [ self answer ];
+				with: 'Cancelar'.
+			html button
+				callback: [ self save ];
+				with: 'Guardar' ]
+]
+
+{ #category : #rendering }
+NewQuestionComponent >> save [
+	self session user
+		addQuestion: title
+		description: description
+		topics: (Cuoora instance topics: (topics splitOn: ',')).
+	self answer
 ]

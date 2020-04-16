@@ -6,7 +6,7 @@ Class {
 
 { #category : #rendering }
 QuestionComponent >> goToQuestionDetail [
-	changeComponent call: (QuestionDetail with: post)
+	changeComponent call: (QuestionDetailComponent question: post)
 ]
 
 { #category : #rendering }

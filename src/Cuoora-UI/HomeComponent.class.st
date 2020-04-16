@@ -5,10 +5,6 @@ Class {
 }
 
 { #category : #adding }
-HomeComponent >> addAnswer [
-]
-
-{ #category : #adding }
 HomeComponent >> addQuestion [
 	self call: NewQuestionComponent new
 ]
@@ -35,16 +31,7 @@ HomeComponent >> renderNewQuestionOn: html [
 { #category : #rendering }
 HomeComponent >> renderQuestionsOn: html [
 	(self session user getRelevantQuestions takeFirst: 5)
-		do: [ :each | 
+		do: [ :question | 
 			html
-				header: each title;
-				text: 'Realizada por ';
-				text: each author username;
-				text: each answers size;
-				text: ' respuestas';
-				text: each getLikes;
-				text: 'likes';
-				text: each getDislikes;
-				text: 'dislikes';
-				space ]
+				render: (QuestionComponent with: question andChangeComponent: self) ]
 ]

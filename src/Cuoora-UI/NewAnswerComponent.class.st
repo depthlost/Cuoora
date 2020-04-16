@@ -2,24 +2,49 @@ Class {
 	#name : #NewAnswerComponent,
 	#superclass : #WAComponent,
 	#instVars : [
-		'question'
+		'description'
 	],
 	#category : #'Cuoora-UI'
 }
 
-{ #category : #rendering }
-NewAnswerComponent >> renderContentOn: html [
-	| answer |
-	answer := Answer new.
-	self renderQuestionOn: html.
-	html space.
-	html
-		form: [ html
-				paragraph: [ html label: 'RESPONDER '.
-					html textInput on: #description of: answer ] ]
+{ #category : #callbacks }
+NewAnswerComponent >> accept [
+	self answer: description
+]
+
+{ #category : #callbacks }
+NewAnswerComponent >> cancel [
+	self answer: nil
+]
+
+{ #category : #accessing }
+NewAnswerComponent >> description [
+	^ description
+]
+
+{ #category : #accessing }
+NewAnswerComponent >> description: aDescription [
+	description := aDescription
 ]
 
 { #category : #rendering }
-NewAnswerComponent >> renderQuestionOn: html [
-	self call: (QuestionComponent post: question changeComponent: self)
+NewAnswerComponent >> renderContentOn: html [
+	html
+		text: 'Responder';
+		break.
+	self renderDataInputOn: html
+]
+
+{ #category : #rendering }
+NewAnswerComponent >> renderDataInputOn: html [
+	html
+		form: [ html textArea on: #description of: self.
+			html break.
+			html submitButton
+				callback: [ self cancel ];
+				with: 'Cancelar'.
+			html space.
+			html submitButton
+				callback: [ self accept ];
+				with: 'Aceptar' ]
 ]
