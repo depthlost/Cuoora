@@ -41,6 +41,7 @@ UserProfileComponent >> renderQuestionsOn: html [
 	user questions
 		do:
 			[ :each | html render: (QuestionComponent with: each andChangeComponent: self) ]
+		separatedBy: [ html horizontalRule ]
 ]
 
 { #category : #'instance creation' }
