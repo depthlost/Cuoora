@@ -22,7 +22,9 @@ NewQuestionComponent >> renderDataInputOn: html [
 		form: [ html
 				label: 'Título:';
 				space.
-			html textInput callback: [ :input | title := input ].
+			html textInput
+				autofocus;
+				callback: [ :input | title := input ].
 			html
 				break;
 				label: 'Desarrollo:';
@@ -32,7 +34,7 @@ NewQuestionComponent >> renderDataInputOn: html [
 				break;
 				label: 'Tópicos:';
 				space.
-			html textInput callback: [ :input | topics := input splitOn: ',' ].
+			html textInput callback: [ :input | topics := input ].
 			html break.
 			html button
 				callback: [ self answer ];
@@ -44,11 +46,12 @@ NewQuestionComponent >> renderDataInputOn: html [
 
 { #category : #rendering }
 NewQuestionComponent >> save [
-	Cuoora instance
-		addTopics: (topics collect: [ :topic | Topic name: topic description: '' ]).
+	(title isEmpty or: topics isEmpty)
+		ifTrue: [ ^ self ].
+	Cuoora instance addTopicsByString: topics separatedBy: ','.
 	self session user
 		addQuestion: title
 		description: description
-		topics: (Cuoora instance topics: topics).
+		topics: (Cuoora instance topics: (topics splitOn: ',')).
 	self answer
 ]

@@ -13,10 +13,27 @@ UserProfileComponent class >> with: anUser [
 ]
 
 { #category : #rendering }
+UserProfileComponent >> follow [
+	self session user follow: user
+]
+
+{ #category : #rendering }
 UserProfileComponent >> renderContentOn: html [
-	html header: 'Preguntas de ', user username.
-	html space.
+	html strong: 'Preguntas de ' , user username.
+	self session user ~= user
+		ifTrue: [ html space.
+			self renderFollowUserOn: html ].
+	html break.
 	self renderQuestionsOn: html
+]
+
+{ #category : #rendering }
+UserProfileComponent >> renderFollowUserOn: html [
+	(self session user isFollowingTo: user)
+		ifTrue: [ html text: 'Siguiendo' ]
+		ifFalse: [ html anchor
+				callback: [ self follow ];
+				with: 'Seguir' ]
 ]
 
 { #category : #rendering }

@@ -23,12 +23,16 @@ Cuoora class >> instance [
 
 { #category : #adding }
 Cuoora >> addTopic: aTopic [
-	^ topics add: aTopic
+	^ (topics includes: aTopic)
+		ifTrue: [ nil ]
+		ifFalse: [ topics add: aTopic ]
 ]
 
 { #category : #adding }
-Cuoora >> addTopics: someTopics [
-	someTopics do: [ :topic | self addTopic: topic ]
+Cuoora >> addTopicsByString: someTopics separatedBy: separator [
+	(someTopics splitOn: separator)
+		collect:
+			[ :topicName | self addTopic: (Topic name: topicName description: '') ]
 ]
 
 { #category : #adding }
@@ -39,7 +43,7 @@ Cuoora >> addUser: anUser [
 { #category : #initialization }
 Cuoora >> initialize [
 	users := OrderedCollection new.
-	topics := Set new
+	topics := OrderedCollection new
 ]
 
 { #category : #adding }

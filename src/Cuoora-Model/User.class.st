@@ -102,6 +102,14 @@ User >> interestTopics [
 	^ interestTopics
 ]
 
+{ #category : #adding }
+User >> isFollowingTo: anUser [
+	^ following
+		detect: [ :user | user == anUser ]
+		ifFound: [ true ]
+		ifNone: [ false ]
+]
+
 { #category : #accessing }
 User >> password [
 	^ password
