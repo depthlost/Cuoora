@@ -46,6 +46,34 @@ PostTest >> testCalculateScore [
 ]
 
 { #category : #tests }
+PostTest >> testGetDislikes [
+	| otherUser |
+	otherUser := User username: 'maria' password: 'maria123'.
+	self assert: post getDislikes equals: 0.
+	post addCalificationOf: defaultUser isLike: false.
+	post addCalificationOf: otherUser isLike: false.
+	self assert: post getDislikes equals: 2.
+	post addCalificationOf: otherUser isLike: true.
+	self assert: post getDislikes equals: 1.
+	post addCalificationOf: defaultUser isLike: true.
+	self assert: post getDislikes equals: 0
+]
+
+{ #category : #tests }
+PostTest >> testGetLikes [
+	| otherUser |
+	otherUser := User username: 'maria' password: 'maria123'.
+	self assert: post getLikes equals: 0.
+	post addCalificationOf: defaultUser isLike: true.
+	post addCalificationOf: otherUser isLike: true.
+	self assert: post getLikes equals: 2.
+	post addCalificationOf: otherUser isLike: false.
+	self assert: post getLikes equals: 1.
+	post addCalificationOf: defaultUser isLike: false.
+	self assert: post getLikes equals: 0
+]
+
+{ #category : #tests }
 PostTest >> testIsLikeCalificationOf [
 	self assert: (post isLikeCalificationOf: defaultUser) equals: nil.
 	post addCalificationOf: defaultUser isLike: true.

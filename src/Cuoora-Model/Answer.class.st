@@ -14,11 +14,6 @@ Answer class >> author: anAuthor question: aQuestion description: aDescription [
 ]
 
 { #category : #accessing }
-Answer >> description [
-	^ description
-]
-
-{ #category : #accessing }
 Answer >> question [
 	^ question
 ]
@@ -43,9 +38,4 @@ Answer >> removeFromAuthor [
 { #category : #accessing }
 Answer >> respondsTo: aUser [
 	^ question author == aUser
-]
-
-{ #category : #accessing }
-Answer >> retDescription [
-	^ description
 ]

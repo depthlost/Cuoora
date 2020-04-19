@@ -30,6 +30,19 @@ CuooraTest >> testAddTopic [
 ]
 
 { #category : #running }
+CuooraTest >> testAddTopicsByStringSeparatedBy [
+	self assert: cuoora topics isEmpty.
+	cuoora addTopicsByString: 'uno,dos,tres' separatedBy: ','.
+	self assert: cuoora topics size equals: 3.
+	cuoora addTopicsByString: 'cuatro,cinco' separatedBy: ','.
+	self assert: cuoora topics size equals: 5.
+	cuoora addTopicsByString: 'seis' separatedBy: ','.
+	self assert: cuoora topics size equals: 6.
+	cuoora addTopicsByString: 'siete,dos,cuatro' separatedBy: ','.
+	self assert: cuoora topics size equals: 7
+]
+
+{ #category : #running }
 CuooraTest >> testAddUser [
 	self
 		assert: cuoora users isEmpty;

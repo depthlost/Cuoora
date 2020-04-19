@@ -64,6 +64,18 @@ QuestionTest >> testAddAnswer [
 ]
 
 { #category : #tests }
+QuestionTest >> testAnswers [
+	self initializeAnswers.
+	answer2 addCalificationOf: user2 isLike: false.
+	self assert: question answers last equals: answer2.
+	answer1 addCalificationOf: user1 isLike: false.
+	answer1 addCalificationOf: user2 isLike: false.
+	self assert: question answers last equals: answer1.
+	answer2 addCalificationOf: user2 isLike: true.
+	self assert: question answers first equals: answer2
+]
+
+{ #category : #tests }
 QuestionTest >> testRemove [
 
 	|authorsOfResponses topicsOfQuestion authorOfQuestion|

@@ -177,6 +177,13 @@ UserTest >> testGetRelevantQuestions [
 ]
 
 { #category : #running }
+UserTest >> testIsFollowingTo [
+	self deny: (user isFollowingTo: user2).
+	user follow: user2.
+	self assert: (user isFollowingTo: user2)
+]
+
+{ #category : #running }
 UserTest >> testRemoveAnswer [
 	self
 		initializeTopics;

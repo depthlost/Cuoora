@@ -3,14 +3,15 @@ Class {
 	#superclass : #TestCase,
 	#instVars : [
 		'question',
-		'answer'
+		'answer',
+		'answerAuthor'
 	],
 	#category : #'Cuoora-Tests'
 }
 
 { #category : #tests }
 AnswerTest >> setUp [
-	| questionAuthor answerAuthor |
+	| questionAuthor |
 	questionAuthor := User username: 'luis' password: 'luis123'.
 	question := questionAuthor
 		addQuestion: 'A title'
@@ -21,6 +22,16 @@ AnswerTest >> setUp [
 				yourself).
 	answerAuthor := User username: 'maria' password: 'maria123'.
 	answer := answerAuthor addAnswer: 'It is...' answerTo: question
+]
+
+{ #category : #tests }
+AnswerTest >> testQuestion [
+	| newAnswer |
+	self assert: (question answers includes: answer).
+	newAnswer := answerAuthor
+		addAnswer: 'This problem...'
+		answerTo: question.
+	self assert: (question answers includes: newAnswer)
 ]
 
 { #category : #tests }

@@ -4,9 +4,20 @@ Class {
 	#category : #'Cuoora-UI'
 }
 
-{ #category : #adding }
+{ #category : #callbacks }
 HomeComponent >> addQuestion [
 	self call: NewQuestionComponent new
+]
+
+{ #category : #seaside }
+HomeComponent >> children [
+	"aun no implementado"
+	
+]
+
+{ #category : #private }
+HomeComponent >> getQuestions [
+	^ self session user getRelevantQuestions takeFirst: 5
 ]
 
 { #category : #rendering }
@@ -27,7 +38,7 @@ HomeComponent >> renderNewQuestionOn: html [
 
 { #category : #rendering }
 HomeComponent >> renderQuestionsOn: html [
-	(self session user getRelevantQuestions takeFirst: 5)
+	self getQuestions
 		do: [ :question | 
 			html
 				render: (QuestionComponent with: question andChangeComponent: self) ]
