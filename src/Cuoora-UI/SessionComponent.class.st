@@ -17,11 +17,6 @@ SessionComponent >> bodyComponent: aBodyComponent [
 	bodyComponent := aBodyComponent
 ]
 
-{ #category : #seaside }
-SessionComponent >> children [
-	^ {bodyComponent}
-]
-
 { #category : #rendering }
 SessionComponent >> goToUserProfile [
 	bodyComponent call: (UserProfileComponent with: self session user)

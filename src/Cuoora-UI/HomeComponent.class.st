@@ -9,12 +9,6 @@ HomeComponent >> addQuestion [
 	self call: NewQuestionComponent new
 ]
 
-{ #category : #seaside }
-HomeComponent >> children [
-	"aun no implementado"
-	
-]
-
 { #category : #private }
 HomeComponent >> getQuestions [
 	^ self session user getRelevantQuestions takeFirst: 5

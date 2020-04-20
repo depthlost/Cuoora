@@ -38,7 +38,10 @@ NewAnswerComponent >> renderContentOn: html [
 { #category : #rendering }
 NewAnswerComponent >> renderDataInputOn: html [
 	html
-		form: [ html textArea on: #description of: self.
+		form: [ html textArea
+				autofocus;
+				required;
+				on: #description of: self.
 			html break.
 			html submitButton
 				callback: [ self cancel ];

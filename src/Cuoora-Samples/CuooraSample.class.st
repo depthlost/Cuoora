@@ -1,4 +1,7 @@
 "
+Esta clase sirve para generar una instanciacion de prueba del sistema Cuoora.
+Para realizar la instanciacion, se debe ejecutar la siguiente sentencia:
+
 CuooraSample make.
 
 "
