@@ -1,3 +1,8 @@
+"
+|application|
+application := WAAdmin register: LoginComponent asApplicationAt: '/cuoora'.
+application sessionClass: UserSession.
+"
 Class {
 	#name : #HomeComponent,
 	#superclass : #WAComponent,
